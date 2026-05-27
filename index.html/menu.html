@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBXSCENT</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            color: #ffcc00;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            color: #aaaaaa;
+            font-size: 1rem;
+        }
+
+        /* Product Grid Grid Layout */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        /* Product Card Styles to Match Image */
+        .product-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffcc00;
+        }
+
+        /* Image Placeholder Box */
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-color: #262626;
+            border: 2px dashed #444444;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Actual image hidden by default until you add a src */
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product-title {
+            color: #ffcc00;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-description {
+            color: #cccccc;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            width: 100%;
+            display: inline-block;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebd58;
+        }
+
+        .whatsapp-btn:active {
+            transform: scale(0.98);
+        }
+
+       
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+            .catalog-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: #1a1a1a;     /* 🌟 The background color goes here now! */
+    width: 100%;                   /* Forces it to fill the entire screen width */
+    
+    margin: 80px 0 0 0;            /* Rested to 0 on the sides so it touches the screen edges */
+    padding: 40px 5%;              /* Generates top/bottom cushioning and matches side layouts */
+    gap: 30px;
+    box-sizing: border-box;        /* Stops the padding from breaking your page width */
+}
+
+/* 2. Keep your left side text container clean */
+.footer-info-left {
+    flex: 1;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+/* 3. Keep your map box clean and adaptive */
+.footer-map-right {
+    width: 100%;
+    max-width: 350px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.footer-info-left {
+    flex: 1;                        /* Lets the text adjust naturally */
+    color: #ffffff;
+    font-family: sans-serif;
+}
+
+.footer-info-left h3 {
+    color: #a5f004;                 /* Signature green theme color */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.footer-detail {
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+.copyright {
+    color: #777777;
+    font-size: 0.8rem;
+    margin-top: 20px;
+}
+
+/* 3. Styling for the Right Side Map Box */
+.footer-map-right {
+    width: 350px;                   /* Fixed small width for the map */
+    height: 250px;
+    border-radius: 20px;            /* Beautiful curves on all sides */
+    overflow: hidden;               /* Clips the map edges to the curve */
+}
+
+.footer-map-right iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to a new line if needed */
+    justify-content: space-between;
+}
+
+/* This targets your new div and centers it at the bottom */
+.footer-bottom-link {
+  
+    width: 100%;        /* Forces it to take up the full bottom row */
+    text-align: center; /* Centers the text inside */
+    margin-top: 20px;   /* Adds some nice breathing room below the map/contact info */
+}
+
+/* Optional styling to make the link look clean */
+.footer-bottom-link a {
+    color: #ffffff;    /* Change this to match your design's accent color */
+    text-decoration: none;
+    font-weight: bold;
+}
+@keyframes fadein{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+
+    
+
+@keyframes fadein{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>OBXSCENT</h1>
+        <p>Luxury Perfumes & Scents Collection</p>
+        <div class="container nav-content">
+     
+      
+    </header>
+
+    <div class="catalog-container">
+
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="deal.jpg" alt="" width="10px">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Deal</h3>
+            <p class="product-description">A rich, deep blend of rare Cambodian oud, smoky incense, and warm amber accents for an enduring aura.</p>
+            <div class="product-price">₦25,000</div>
+            <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Oud Imperial', '₦25,000')">Order via WhatsApp</a>
+        </div>
+
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="oc.jpg" alt="" width="20px">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Oceanic Breeze</h3>
+            <p class="product-description">Fresh marine notes combined with crisp citrus and a subtle white musk base for everyday freshness.</p>
+            <div class="product-price">₦18,500</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Oceanic Breeze', '₦18,500')">Order via WhatsApp</a>
+        </div>
+
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="kally.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Kally</h3>
+            <p class="product-description">A sweet, creamy blend of premium Madagascar vanilla, roasted almond, and soft sandalwood.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Vanilla Velvet', '₦10,000')">Order via WhatsApp</a>
+        </div>
+
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="9pm.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">9PM</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="karis.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">KARIS</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦3,500</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="armpit spray.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Armpit Spray</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦5,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="party time.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Party Time</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦5,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="roll on.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Roll On</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦2,500</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="matelo.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Maleto</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="riggs.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Riggs</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦3,500</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="axe.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">AXE</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦3,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="element.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Element</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦5,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="aventos.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Aventos</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦8,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="matelo.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Matelot</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="24k.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">24k</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="gk.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">9PM</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+        <div class="product-card">
+            <div class="image-placeholder">
+                <img src="vanilla.jpg" alt="">
+                <span>[ Insert Perfume Image Here ]</span>
+            </div>
+            <h3 class="product-title">Vanilla</h3>
+            <p class="product-description">An elegant combination of blooming red roses, dark patchouli, and spicy pink pepper tones.</p>
+            <div class="product-price">₦10,000</div>
+            <a href="https://wa.me/+2348106101566" class="whatsapp-btn" onclick="sendWhatsAppMessage(event, 'Midnight Rose', '₦30,000')">Order via WhatsApp</a>
+        </div>
+
+    </div>
+    <footer class="footer-container">
+  
+  <div class="footer-info-left">
+    <h3>Contact Us</h3>
+    <p class="footer-detail">📞 Phone: <strong>+234 810 610 1566</strong></p>
+    <p class="footer-detail">📍 Location: Abraka, Delta State, Nigeria</p>
+    <p class="footer-detail">⏰ Hours: Mon - Sat: 9:00 AM - 10:00 PM</p>
+    <p class="copyright">© 2026 \\OBX Scent. All rights reserved.</p>
+  </div>
+
+  <div class="footer-map-right">
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.3471355108895!2d6.123424474476957!3d5.8065534310804265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104173bc1e826e8d%3A0x21c3328283881547!2sDelta%20State%20University%20Main%20Campus!5e0!3m2!1sen!2sng!4v1779318468454!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <div class="footer-bottom-link"><a href="index.html">HOME🏡</a></div>
+
+</footer>
+
+    <script>
+        // CONFIGURATION: Replace this with your actual WhatsApp phone number (with country code, no "+" or spaces)
+        // Example for Nigeria: "2348123456789"
+        const WHATSAPP_NUMBER = "2348106101566"; 
+
+        function sendWhatsAppMessage(event, productName, productPrice) {
+            // Prevent default anchor link behavior
+            event.preventDefault();
+
+            // Construct the personalized order message
+            const message = `Hello OBXSCENT, I would like to order:\n\n` +
+                            `🛍️ Product: ${productName}\n` +
+                            `💰 Price: ${productPrice}\n\n` +
+                            `Please let me know how to proceed with payment. Thank you!`;
+
+            // Encode the message text for URL safety
+            const encodedMessage = encodeURIComponent(message);
+
+            // Generate the WhatsApp API link
+            const whatsappUrl = `https://wa.me/2348106101566?text=${encodedMessage}`;
+
+            // Open the link in a new browser tab
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>

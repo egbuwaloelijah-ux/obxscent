@@ -1,0 +1,440 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    background-color: #0a0a0a;
+    
+}
+@keyframes fadein{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+/* NAV */
+.nav {
+    position: relative;
+    background-color: #111;
+    padding: 150px 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./vid.gif');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    /* This triggers a smooth, continuous zoom loop */
+    animation: kenBurns 12s ease-in-out infinite alternate;
+    opacity:100% ; /* For only the Backgroun-image*/
+}
+/* The Ken Burns Zoom Animation */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15); /* Subtly zooms in 15% */
+    }
+}
+
+
+
+
+.container.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff88;
+    letter-spacing: 2px;
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #00ff88;
+}
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fcca06;
+    transition: 0.3s;
+}
+
+
+
+    
+    .nav-links {
+        display: none; 
+        position: absolute;
+        top: 40px;
+        right: 0px;
+        width: auto;
+        min-width: 160px;
+        background-color: transparent;
+        padding: 0;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 999;
+    }
+    
+    .nav-links.active { display: flex; }
+
+.nav-links.active {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    
+    
+}
+header.nav {
+    position: relative;
+}
+/* --- Hero Section Styles --- */
+.hero-section {
+    position: relative;
+    height: 80vh; /* Takes up 80% of the screen height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the section without stretching */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darkens the video so text is readable */
+    z-index: -1;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #dddddd;
+}
+
+
+/* --- GIF Showcase Section --- */
+.gif-showcase {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #443503;
+}
+
+.gif-showcase h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.gif-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gif-card {
+    background: #575754;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+}
+/* 1. Make each card the anchor point for its inner elements */
+.gif-card {
+    position: relative;
+    overflow: visible; /* Allows the badge to pop out slightly over the edge if needed */
+}
+
+/* 2. Position the badge beautifully in the upper-right corner of each card */
+.spotlight-badge {
+    position: absolute;
+    top: -15px;    /* A negative value lets it overlap the top border stylishly */
+    right: -15px;  /* A negative value lets it overlap the right border */
+    z-index: 5;    /* Ensures it sits cleanly above the card elements */
+    
+    /* Design properties */
+    width: 75px;   /* Slightly smaller so it fits nicely on single cards */
+    height: 75px;
+    background-color: #1a1a1a;
+    border: 2px solid #d4af37;
+    border-radius: 50%;
+    
+    /* Centering text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    /* Smooth rolling effect */
+    animation: spinBadge 12s linear infinite;
+}
+
+/* 3. Text styling inside the badge */
+.spotlight-badge span {
+    color: #d4af37;
+    font-size: 8px; /* Scaled down slightly to fit the smaller badge width */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+/* 4. The Animation Keyframes */
+@keyframes spinBadge {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gif-card:hover {
+    transform: translateY(-5px); /* Subtle hover lift effect */
+}
+
+.showcase-gif {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.gif-card h3 {
+    padding: 15px 0;
+    font-size: 1.2rem;
+}
+/* --- Why Section --- */
+.why-section {
+  background-color: #0d0d0d;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.why-section h2 {
+  font-size: 2.2rem;
+  color: #fcca06;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.why-subtitle {
+  color: #aaa;
+  font-size: 1rem;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.why-card {
+  background-color: #1a1a1a;
+  border: 1px solid #fcca06;
+  border-radius: 12px;
+  padding: 40px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(252, 202, 6, 0.2);
+}
+
+.why-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.why-card h3 {
+  color: #fcca06;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.why-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: #1a1a1a;     /* 🌟 The background color goes here now! */
+    width: 100%;                   /* Forces it to fill the entire screen width */
+    
+    margin: 80px 0 0 0;            /* Rested to 0 on the sides so it touches the screen edges */
+    padding: 40px 5%;              /* Generates top/bottom cushioning and matches side layouts */
+    gap: 30px;
+    box-sizing: border-box;        /* Stops the padding from breaking your page width */
+}
+
+/* 2. Keep your left side text container clean */
+.footer-info-left {
+    flex: 1;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+/* 3. Keep your map box clean and adaptive */
+.footer-map-right {
+    width: 100%;
+    max-width: 350px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.footer-info-left {
+    flex: 1;                        /* Lets the text adjust naturally */
+    color: #ffffff;
+    font-family: sans-serif;
+}
+
+.footer-info-left h3 {
+    color: #a5f004;                 /* Signature green theme color */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.footer-detail {
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+.copyright {
+    color: #777777;
+    font-size: 0.8rem;
+    margin-top: 20px;
+}
+
+/* 3. Styling for the Right Side Map Box */
+.footer-map-right {
+    width: 350px;                   /* Fixed small width for the map */
+    height: 250px;
+    border-radius: 20px;            /* Beautiful curves on all sides */
+    overflow: hidden;               /* Clips the map edges to the curve */
+}
+
+.footer-map-right iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to a new line if needed */
+    justify-content: space-between;
+}
+
+/* This targets your new div and centers it at the bottom */
+.footer-bottom-link {
+  
+    width: 100%;        /* Forces it to take up the full bottom row */
+    text-align: center; /* Centers the text inside */
+    margin-top: 20px;   /* Adds some nice breathing room below the map/contact info */
+}
+
+/* Optional styling to make the link look clean */
+.footer-bottom-link a {
+    color: #ffffff;    /* Change this to match your design's accent color */
+    text-decoration: none;
+    font-weight: bold;
+}
+@keyframes fadein{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+
+    
+
+@keyframes fadein{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
